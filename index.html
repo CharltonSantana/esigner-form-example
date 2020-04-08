@@ -1,0 +1,57 @@
+<html>
+
+    <head>
+        <title>Signer Iframe Example</title>
+    </head>
+
+
+    <body>
+        <form action="">
+
+            <div>
+                <label for="documentId">Document Id:</label>
+                <input type="text" name="documentId" id="documentId">
+            </div>
+
+
+            <button  type="button" onclick="openSign()">Sign</button>
+            <div id="iframe-holder" style="display: none">
+                <iframe src="third-party/document.html"></iframe>
+            </div>
+        </form>
+
+
+        <script>
+
+            function openSign() {
+                document.getElementById('iframe-holder').style.display = 'block';
+            }
+
+            window.addEventListener("message", receiveMessage, false);
+            function receiveMessage(event) {
+                let message = event.data;
+                console.log(message)
+
+                let tag = message.split(/=(.+)/);
+
+                if(tag[0] === "esign-complete") {
+                    signingComplete(tag[1])
+                }
+            }
+
+            function signingComplete(documentId) {
+                document.getElementById('iframe-holder').style.display = 'none';
+                document.getElementById('documentId').value = documentId ;
+
+                // Show Sign Success
+                // Allow move to next page
+            }
+
+
+
+        </script>
+
+    </body>
+
+
+</html>

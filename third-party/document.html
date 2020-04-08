@@ -1,0 +1,35 @@
+<html>
+
+    <head>
+        <title>Consent Document</title>
+    </head>
+
+
+    <body>
+    <button  onclick="done()">Sign Document</button>
+
+    <script>
+
+        function done() {
+            let data = {
+                'document_id': exampleId(10)
+            }
+            window.parent.postMessage("esign-complete=" + data["document_id"], "*")
+        }
+
+        function exampleId(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+    </script>
+
+    </body>
+
+
+</html>
